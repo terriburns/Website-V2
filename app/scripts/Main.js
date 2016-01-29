@@ -1,9 +1,9 @@
-React.render(<Main />, document.getElementById('app'));
+var react = require('react');
 
 var Main = React.createClass({
   render: function() {
     return {
-      <div>Hello, haters!</div>
+      <div>This is the Main page</div>
     };
   }
 });
