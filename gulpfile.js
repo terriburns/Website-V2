@@ -7,8 +7,8 @@ var htmlreplace = require('gulp-html-replace');
 
 var path = {
   HTML: 'index.html',
-  ALL: ['scripts/*.js', 'srcipts/**/*.js', 'index.html'],
-  JS: ['srcipts/*.js', 'srcipts/**/*.js'],
+  ALL: ['app/scripts/*.js', 'index.html'],
+  JS: ['app/scripts/*.js'],
   MINIFIED_OUT: 'build.min.js',
   DEST_SRC: 'dist/src',
   DEST_BUILD: 'dist/build',
@@ -21,14 +21,10 @@ gulp.task('transform', function(){
   .pipe(gulp.dest(path.DEST_SRC));
 });
 
-gulp.task('copy', function(){
+/*gulp.task('copy', function(){
   gulp.src(path.HTML)
   .pipe(gulp.dest(path.DEST));
-});
-
-gulp.task('watch', function(){
-  gulp.watch(path.ALL, ['transform', 'copy']);
-});
+});*/
 
 gulp.task('build', function(){
   gulp.src(path.JS)
@@ -38,6 +34,14 @@ gulp.task('build', function(){
   .pipe(gulp.dest(path.DEST_BUILD));
 });
 
-gulp.task('default', ['watch']);
+gulp.task('replaceHTML', function(){
+  gulp.src(path.HTML)
+  .pipe(htmlreplace({
+    'js': 'build/' + path.MINIFIED_OUT
+  }))
+  .pipe(gulp.dest(path.DEST));
+});
+
+gulp.task('default', ['transform', 'production']);
 
 gulp.task('production', ['replaceHTML', 'build']);
