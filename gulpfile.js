@@ -4,6 +4,7 @@ var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var htmlreplace = require('gulp-html-replace');
+var gutil = require('gulp-util');
 
 var path = {
   HTML: 'index.html',
@@ -31,7 +32,8 @@ gulp.task('build', function(){
   .pipe(react())
   .pipe(concat(path.MINIFIED_OUT))
   .pipe(uglify(path.MINIFIED_OUT))
-  .pipe(gulp.dest(path.DEST_BUILD));
+  .pipe(gulp.dest(path.DEST_BUILD))
+  .pipe(uglify().on('error', gutil.log));
 });
 
 gulp.task('replaceHTML', function(){
