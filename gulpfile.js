@@ -16,6 +16,8 @@ var path = {
   DEST: 'dist'
 };
 
+gulp.task('default', ['transform']);
+
 gulp.task('transform', function(){
   gulp.src(path.JS)
   .pipe(react())
@@ -25,7 +27,7 @@ gulp.task('transform', function(){
 /*gulp.task('copy', function(){
   gulp.src(path.HTML)
   .pipe(gulp.dest(path.DEST));
-});*/
+});
 
 gulp.task('build', function(){
   gulp.src(path.JS)
@@ -46,4 +48,4 @@ gulp.task('replaceHTML', function(){
 
 gulp.task('default', ['transform', 'production']);
 
-gulp.task('production', ['replaceHTML', 'build']);
+gulp.task('production', ['replaceHTML', 'build']);*/
