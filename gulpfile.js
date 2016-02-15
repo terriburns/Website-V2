@@ -16,15 +16,19 @@ var path = {
   DEST: 'dist'
 };
 
-gulp.task('default', ['transform']);
+gulp.task('default', function () {
+  return gulp.src('template.jsx')
+  .pipe(react())
+  .pipe(gulp.dest('dist'));
+});
 
-gulp.task('transform', function(){
+  /*gulp.task('transform', function(){
   gulp.src(path.JS)
   .pipe(react())
   .pipe(gulp.dest(path.DEST_SRC));
 });
 
-/*gulp.task('copy', function(){
+gulp.task('copy', function(){
   gulp.src(path.HTML)
   .pipe(gulp.dest(path.DEST));
 });
