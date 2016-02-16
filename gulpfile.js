@@ -13,7 +13,6 @@ var path = {
   MINIFIED_OUT: 'build.min.js',
   DEST_SRC: 'dist/src',
   DEST_BUILD: 'dist/build',
-  DEST: 'dist'
 };
 
 gulp.task('default', function () {
@@ -22,13 +21,13 @@ gulp.task('default', function () {
   .pipe(gulp.dest('dist'));
 });
 
-  /*gulp.task('transform', function(){
-  gulp.src(path.JS)
+gulp.task('transform', function(){
+  gulp.src('template.jsx')
   .pipe(react())
   .pipe(gulp.dest(path.DEST_SRC));
 });
 
-gulp.task('copy', function(){
+/*gulp.task('copy', function(){
   gulp.src(path.HTML)
   .pipe(gulp.dest(path.DEST));
 });
