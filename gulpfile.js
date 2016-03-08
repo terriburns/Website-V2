@@ -1,8 +1,19 @@
+"use strict";
 var gulp = require('gulp');
 var browserify = require('gulp-browserify');
 var concat = require('gulp-concat');
-var babelify = require('babelify');
-var reactify = require('reactify');
+//var babelify = require('babelify');
+//var reactify = require('reactify');
+
+var path = {
+  HTML: 'index.html',
+  ALL: ['app/scripts/*.js', 'index.html'],
+  JS: ['app/scripts/*.js'],
+  MINIFIED_OUT: 'build.min.js',
+  DEST_SRC: 'dist/src',
+  DEST_BUILD: 'dist/build',
+};
+
 
 gulp.task('browserify', function() {
   gulp.src('app/scrips/App.js')
@@ -16,7 +27,13 @@ gulp.task('copy', function() {
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('default',['browserify', 'copy']);
+gulp.task('transform', function(){
+  gulp.src('template.jsx')
+  //.pipe(react())
+  .pipe(gulp.dest(path.DEST_SRC));
+});
+
+gulp.task('default',['browserify', 'copy', 'transform']);
 
 gulp.task('watch', function() {
   gulp.watch('app/**/*.*', ['default']);
@@ -30,26 +47,12 @@ var uglify = require('gulp-uglify');
 var htmlreplace = require('gulp-html-replace');
 var gutil = require('gulp-util');
 
-var path = {
-  HTML: 'index.html',
-  ALL: ['app/scripts/*.js', 'index.html'],
-  JS: ['app/scripts/*.js'],
-  MINIFIED_OUT: 'build.min.js',
-  DEST_SRC: 'dist/src',
-  DEST_BUILD: 'dist/build',
-};
-
 gulp.task('default', function () {
   return gulp.src('template.jsx')
   .pipe(react())
   .pipe(gulp.dest('dist'));
 });
 
-gulp.task('transform', function(){
-  gulp.src('template.jsx')
-  .pipe(react())
-  .pipe(gulp.dest(path.DEST_SRC));
-});
 
 gulp.task('build', function(){
   gulp.src(template.jsx)
